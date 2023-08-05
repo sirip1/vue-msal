@@ -104,10 +104,10 @@ export class MSAL implements MSALBasic {
         }
         this.getStoredCustomData();
     }
-    signIn(loginHint:string) {
+    signIn(loginHint?:string) {
         if (!this.lib.isCallback(window.location.hash) && !this.lib.getAccount()) {
             // request can be used for login or token request, however in more complex situations this can have diverging options
-            this.request.loginHint = lognHint
+            if ( typeof loginHint !== 'undefined' )this.request.loginHint = lognHint
             this.lib.loginRedirect(this.request);
         }
     }
