@@ -96,17 +96,18 @@ export class MSAL implements MSALBasic {
         this.data.isAuthenticated = this.isAuthenticated();
         if (this.data.isAuthenticated) {
             this.data.user = this.lib.getAccount();
-            this.acquireToken().then(() => {
-                if (this.graph.callAfterInit) {
+            if (this.graph.callAfterInit) {
+                this.acquireToken().then(() => {
                     this.initialMSGraphCall();
-                }
-            });
+                });
+            }
         }
         this.getStoredCustomData();
     }
-    signIn() {
+    signIn(loginHint:string) {
         if (!this.lib.isCallback(window.location.hash) && !this.lib.getAccount()) {
             // request can be used for login or token request, however in more complex situations this can have diverging options
+            this.request.loginHint = lognHint
             this.lib.loginRedirect(this.request);
         }
     }
