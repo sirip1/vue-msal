@@ -22,7 +22,8 @@ export type Auth = {
 }
 
 export type Request = {
-    scopes?: string[]
+    scopes?: string[],
+    loginHint?: string
 }
 
 export type GraphDetailedObject = AxiosRequestConfig & {
@@ -74,7 +75,9 @@ export interface MSALBasic {
     isAuthenticated: () => boolean,
     acquireToken: (request: Request, retries: number) => Promise<AuthResponse | boolean>,
     msGraph: (endpoints:  GraphEndpoints, batchUrl: string | undefined) => Promise<object>,
-    saveCustomData: (key: string, data: any) => void
+    saveCustomData: (key: string, data: any) => void,
+    setOnTokenCallback: (cb: any) => void,
+    setOnAuthenticationCallback: (cb: any) => void
 }
 
 export type CategorizedGraphRequests = { singleRequests: GraphDetailedObject[], batchRequests: { [id:string]: GraphDetailedObject[] } }

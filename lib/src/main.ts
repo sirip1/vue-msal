@@ -104,10 +104,17 @@ export class MSAL implements MSALBasic {
         }
         this.getStoredCustomData();
     }
+    setOnTokenCallback(cb) {
+        this.options.auth.onToken = cb;
+    }
+    setOnAuthenticationCallback(cb) {
+        this.options.auth.onAuthentication = cb;
+    }
     signIn(loginHint?:string) {
-        if (!this.lib.isCallback(window.location.hash) && !this.lib.getAccount()) {
+        /* login always even if there is valid user in the .lib */
+        if (!this.lib.isCallback(window.location.hash) /*&& !this.lib.getAccount()*/) {
             // request can be used for login or token request, however in more complex situations this can have diverging options
-            if ( typeof loginHint !== 'undefined' )this.request.loginHint = lognHint
+            this.request.loginHint = loginHint
             this.lib.loginRedirect(this.request);
         }
     }
@@ -126,7 +133,7 @@ export class MSAL implements MSALBasic {
             const response = await this.lib.acquireTokenSilent(request);
             this.handleTokenResponse(null, response);
             return response;
-        } catch (error) {
+        } catch (error: any) {
             // Upon acquireTokenSilent failure (due to consent or interaction or login required ONLY)
             // Call acquireTokenRedirect
             if (this.requiresInteraction(error.errorCode)) {
@@ -392,7 +399,7 @@ export class MSAL implements MSALBasic {
                         return cb.id === currentCb.id;
                     });
                     this.storeCallbackQueue();
-                } catch (e) {
+                } catch (e: any) {
                     console.warn(`Callback '${cb.id}' failed with error: `, e.message);
                 }
             }

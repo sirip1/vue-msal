@@ -4,7 +4,11 @@
   "description": "Vue plugin for using Microsoft Authentication Library (MSAL)",
   "main": "dist/plugin.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rm -rf ./dist",
+    "build": "npm run clean && npm run build:all",
+    "build:all": "tsc -p ./tsconfig.json",
+    "prepack": "npm run build"
   },
   "keywords": [
     "vue",
@@ -24,7 +28,8 @@
     }
   ],
   "eslintIgnore": [
-    "lib/*.*"
+    "lib/*.*",
+    "dist/*.*"
   ],
   "homepage": "https://github.com/mvertopoulos/vue-msal#readme",
   "publishConfig": {
