@@ -1,5 +1,5 @@
 {
-  "name": "vue-msal",
+  "name": "@sirip1/vue-msal",
   "version": "3.2.0",
   "description": "Vue plugin for using Microsoft Authentication Library (MSAL)",
   "main": "dist/plugin.js",
@@ -20,7 +20,7 @@
   "author": "Marios Vertopoulos",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mvertopoulos/vue-msal/issues"
+    "url": "https://github.com/sirip1/vue-msal/issues"
   },
   "contributors": [
     {
@@ -31,13 +31,13 @@
     "lib/*.*",
     "dist/*.*"
   ],
-  "homepage": "https://github.com/mvertopoulos/vue-msal#readme",
+  "homepage": "https://github.com/sirip1/vue-msal#readme",
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mvertopoulos/vue-msal.git"
+    "url": "git+https://github.com/sirip1/vue-msal.git"
   },
   "dependencies": {
     "axios": "^0.19.0",
